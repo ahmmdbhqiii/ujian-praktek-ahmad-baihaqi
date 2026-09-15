@@ -1,18 +1,38 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Post;
+
 
 Route::get('/', function () {
-    return view('Home', ['title' => 'Home Page']);
+    return view('home', ['title' => 'Home Page']);
 });
 
-Route::get('/blog', function () {
-    return view('Blog', ['title' => 'Blog']);
+
+Route::get('/posts', function () {
+    return view('posts', [
+        'title' => 'Blog Posts',
+        'posts' => Post::all()
+    ]);
 });
+
+
+Route::get('/posts/{post:slug}', function (Post $post) {
+    return view('post', [
+        'title' => 'Single Post',
+        'post' => $post
+    ]);
+});
+
+
 Route::get('/about', function () {
-    return view('About', ['title' => 'About']);
+    return view('about', [
+        'title' => 'About Us',
+        'nama' => 'Ahmad Baihaqi'
+    ]);
 });
+
 
 Route::get('/contact', function () {
-    return view('Contact', ['title' => 'contact']);
+    return view('contact', ['title' => 'Contact Page']);
 });
